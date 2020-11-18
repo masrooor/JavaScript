@@ -58,3 +58,41 @@
 return false;
 });
 </script>
+<?php
+add_action('wp_ajax_submitProposedInterviewsRecords', 'submitProposedInterviewsRecords');
+
+   
+function submitProposedInterviewsRecords()
+    {
+
+        global $wpdb;
+        $entryId = $_POST['entryId']; 
+
+        $clientId = $_POST['clientId'];
+        $assessor = $_POST['assessor'];
+ 
+            $current_user = wp_get_current_user();
+        $query_entry = "UPDATE wp_client_status 
+        SET  assessor = '$current_user->display_name', status = 'Under Review'
+        WHERE entry_id = '$entryId' AND client_id = '$clientId' ";
+        $wpdb->query($query_entry); 
+     //   ob_clean();
+        echo 'successfully!';
+ 
+        //  } 
+       // wp_die();
+
+     //   wp_die();
+    //  die();
+        
+}
+add_action('wp_ajax_deleteApplication', 'deleteApplication');
+    function deleteApplication()
+    {
+        global $wpdb;
+        $deleteEntry = $_POST['deleteEntry']; 
+        $delete_query = "DELETE FROM wp_client_status
+        WHERE id = '$deleteEntry'";
+        $wpdb->query($delete_query); 
+    }
+?>
