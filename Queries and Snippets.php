@@ -58,6 +58,7 @@ $data = $wpdb->get_results("SELECT *  FROM wp_client_status WHERE (status <> 'Ta
 // for getting single row 
 $dropDownData = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM wp_client_status WHERE entry_id = '$applicationId'  " )) ;
 //
-
+// get two decimal places 
+echo number_format((float)$com_price, 2, '.', '');
 
 ?>
