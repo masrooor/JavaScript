@@ -1,0 +1,110 @@
+add_filter ( 'woocommerce_account_menu_items', 'affiliate_area_link', 40 );
+function affiliate_area_link( $menu_links ){
+   
+  
+  $menu_links = array_slice( $menu_links, 0, 12, true ) 
+	+ array( 
+    'affiliate' => 'Affiliate' ,
+    'affiliate-dashboard' => 'Affiliate Dashboard' ,
+  'graph' => 'Graph' ,
+  'statistics' => 'Statistics',
+  'referrals' => 'Referrals',
+  'payouts' => 'Payouts',
+  'visits' => 'Visits',
+  'creatives' => 'Creatives',
+  'settings' => 'Settings')
+	+ array_slice( $menu_links, 12, NULL, true );
+
+
+  return $menu_links;
+}
+/*
+ * Step 2. Register Permalink Endpoint
+ */
+add_action( 'init', '_add_endpoint' );
+function _add_endpoint() {
+ 
+  add_rewrite_endpoint( 'affiliate', EP_PAGES );
+  add_rewrite_endpoint( 'affiliate-dashboard', EP_PAGES );
+
+  add_rewrite_endpoint( 'graph', EP_PAGES );
+  add_rewrite_endpoint( 'statistics', EP_PAGES );
+  add_rewrite_endpoint( 'referrals', EP_PAGES );
+  add_rewrite_endpoint( 'payouts', EP_PAGES );
+  add_rewrite_endpoint( 'visits', EP_PAGES );
+  add_rewrite_endpoint( 'creatives', EP_PAGES );
+  add_rewrite_endpoint( 'settings', EP_PAGES );
+ 
+}
+
+
+
+// graph
+add_action( 'woocommerce_account_graph_endpoint', 'my_affiliate_link_graph_endpoint_content' );
+function my_affiliate_link_graph_endpoint_content() {
+
+  
+	
+  echo do_shortcode('[affiliate_area_graphs]');
+
+
+}
+
+// creatives
+add_action( 'woocommerce_account_creatives_endpoint', 'my_affiliate_link_creatives_endpoint_content' );
+function my_affiliate_link_creatives_endpoint_content() {
+
+	
+  echo do_shortcode('[affiliate_area_creatives]');
+
+
+}
+// settings
+add_action( 'woocommerce_account_settings_endpoint', 'my_affiliate_link_settings_endpoint_content' );
+function my_affiliate_link_settings_endpoint_content() {
+
+
+  echo do_shortcode('[affiliate_area_settings]');
+
+
+}
+// statistics
+add_action( 'woocommerce_account_statistics_endpoint', 'my_affiliate_link_statistics_endpoint_content' );
+function my_affiliate_link_statistics_endpoint_content() {
+
+
+  echo do_shortcode('[affiliate_area_stats]');
+
+
+}
+// referrals
+add_action( 'woocommerce_account_referrals_endpoint', 'my_affiliate_link_referrals_endpoint_content' );
+function my_affiliate_link_referrals_endpoint_content() {
+
+
+  echo do_shortcode('[affiliate_area_referrals]');
+
+
+}
+
+// payouts
+
+add_action( 'woocommerce_account_payouts_endpoint', 'my_affiliate_link_payouts_endpoint_content' );
+function my_affiliate_link_payouts_endpoint_content() {
+
+
+  echo do_shortcode('[affiliate_area_payouts]');
+
+
+}
+
+// visits
+
+add_action( 'woocommerce_account_visits_endpoint', 'my_affiliate_link_visits_endpoint_content' );
+function my_affiliate_link_visits_endpoint_content() {
+
+
+  echo do_shortcode('[affiliate_area_visits]');
+
+
+}
