@@ -1,0 +1,40 @@
+<?php 
+$productUrl = get_permalink( $product->ID );
+$upatedProductLink = $productUrl.'ref/'.$result->affiliate_id;
+$proID = get_the_ID();
+echo '
+<input  id = "ref-product-share-link-'.$proID.'" readonly="" type="text" class="wp-aff-inp ref-product-share-link"  value="'.$upatedProductLink.'" >
+
+<button style = "padding: 0px 65px; margin: 5px; border-radius: 5px; font-size: 15px;" onclick="customCopyToClipboard('.$proID.')"> Click to Copy </button>
+'
+?>
+<script>
+  function customCopyToClipboard(elementId) {
+
+  // Create a "hidden" input
+  var aux = document.createElement("input");
+  var shareableLink = document.getElementById('ref-product-share-link-'+elementId);
+
+  // Assign it the value of the specified element
+  aux.setAttribute("value", document.getElementById('ref-product-share-link-'+elementId).value);
+
+
+
+  // Append it to the body
+  document.body.appendChild(aux);
+
+  // Highlight its content
+  aux.select();
+
+  // Copy the highlighted text
+  document.execCommand("copy");
+
+  // Remove it from the body
+  document.body.removeChild(aux);
+  shareableLink.select();
+
+
+}
+</script>
+
+
