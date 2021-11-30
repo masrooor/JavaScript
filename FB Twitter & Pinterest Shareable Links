@@ -1,0 +1,7 @@
+$productUrl = get_permalink( $product->ID );
+$thumbnailImage =  wp_get_attachment_url( $product->get_image_id() );
+$pinURL = 'https://pinterest.com/pin/create/button/?url=' . $productUrl . '&media='. $thumbnailImage;
+$title = get_the_title();
+$updatedTitle = implode("%20",explode(" ",$title));
+$fbURL = 'https://www.facebook.com/sharer/sharer.php?u='. $productUrl . '&title='. $updatedTitle;
+$twitterURL = 'https://twitter.com/share?text=' . $updatedTitle . '&url=' . $productUrl;
